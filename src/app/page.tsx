@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -210,6 +211,7 @@ const normalizeDraft = (
 };
 
 export default function Home() {
+  const router = useRouter();
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -330,6 +332,17 @@ export default function Home() {
                 Describe your topic, choose a hosting vibe, and let VibeCast craft a script,
                 episode beats, and an optional synthetic audio draft using fal.ai.
               </p>
+              <div className="pt-2">
+                <Button
+                  onClick={() => router.push("/video-generation")}
+                  variant="outline"
+                  size="lg"
+                  className="gap-2"
+                >
+                  <Wand2 className="size-4" />
+                  Generate Video
+                </Button>
+              </div>
             </div>
             <div className="hidden justify-end gap-2 sm:flex">
               {starterKits.map((kit) => (
