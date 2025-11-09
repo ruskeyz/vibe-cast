@@ -34,13 +34,22 @@ Return only a string of text that would be read outloud and nothing else.
 Optimize the text to be entartaining and interesting.
 ${text}.`;
 
-  const result = await fal.subscribe("fal-ai/any-llm/enterprise", {
-    input: {
-      prompt,
-      priority: "latency",
-      model: "google/gemini-2.5-flash"
+  // const result = await fal.subscribe("fal-ai/any-llm/enterprise", {
+  //   input: {
+  //     prompt,
+  //     priority: "latency",
+  //     model: "google/gemini-2.5-flash"
+  //   },
+  // });
+  const result = {
+    "data": {
+      "output": "\"Exciting news! We're celebrating a year of steady progress, hitting consistent revenue growth and strong client retention. Product enhancements and operational wins underscore our commitment to excellence. Plus, buckle up for updated equity vesting schedules designed to align your success with ours. Get ready for our 'Optimization and Focus Year' – doubling down on efficiency and growth. BasicCorporate is thriving, thanks to you!\"",
+      "reasoning": null,
+      "partial": false,
+      "error": null
     },
-  });
+    "requestId": "37917cef-a10c-4412-9079-cbb657dcf1c7"
+  }
 
   // Extract narration text from result
   console.log("[Step 1] Result:", JSON.stringify(result, null, 2));
@@ -55,28 +64,28 @@ async function runGenerateNarration(
 ): Promise<GenerateNarrationOutput> {
   console.log("[Step 2] Generating narration audio:", processedText.narration.substring(0, 50));
 
-  const result = await fal.subscribe("fal-ai/elevenlabs/tts/eleven-v3", {
-    input: {
-      text: processedText.narration,
-      voice: "George",
-      stability: 0.5,
-      similarity_boost: 0.75,
-      speed: 1
-    },
-    logs: true,
-  });
-  // const result = {
-  //   "data": {
-  //     "audio": {
-  //       "url": "https://v3b.fal.media/files/b/rabbit/PTmgoZ436rQtYivmNmGr7_output.mp3",
-  //       "content_type": "audio/mpeg",
-  //       "file_name": "output.mp3",
-  //       "file_size": 2015444
-  //     },
-  //     "timestamps": null
+  // const result = await fal.subscribe("fal-ai/elevenlabs/tts/eleven-v3", {
+  //   input: {
+  //     text: processedText.narration,
+  //     voice: "George",
+  //     stability: 0.5,
+  //     similarity_boost: 0.75,
+  //     speed: 1
   //   },
-  //   "requestId": "68d6747d-b69f-4d08-8ba2-45bf978762f5"
-  // }
+  //   logs: true,
+  // });
+  const result = {
+    "data": {
+      "audio": {
+        "url": "https://v3b.fal.media/files/b/rabbit/PTmgoZ436rQtYivmNmGr7_output.mp3",
+        "content_type": "audio/mpeg",
+        "file_name": "output.mp3",
+        "file_size": 2015444
+      },
+      "timestamps": null
+    },
+    "requestId": "68d6747d-b69f-4d08-8ba2-45bf978762f5"
+  }
 
   console.log("[Step 2] Result:", JSON.stringify(result, null, 2));
   const audioUrl = result.data.audio.url as string;
@@ -90,19 +99,30 @@ async function runGenerateVideo(audioUrl: string): Promise<string> {
 
   const imageUrl = "https://see-real-granola-hacl.s3.eu-west-2.amazonaws.com/photo_2025-11-09+14.25.47.jpeg"
 
-  const result = await fal.subscribe("veed/fabric-1.0/fast", {
-    input: {
-      image_url: imageUrl,
-      audio_url: audioUrl,
-      resolution: "480p"
-    },
-    logs: true,
-    onQueueUpdate: (update) => {
-      if (update.status === "IN_PROGRESS") {
-        update.logs.map((log) => log.message).forEach(console.log);
+  // const result = await fal.subscribe("veed/fabric-1.0/fast", {
+  //   input: {
+  //     image_url: imageUrl,
+  //     audio_url: audioUrl,
+  //     resolution: "480p"
+  //   },
+  //   logs: true,
+  //   onQueueUpdate: (update) => {
+  //     if (update.status === "IN_PROGRESS") {
+  //       update.logs.map((log) => log.message).forEach(console.log);
+  //     }
+  //   },
+  // });
+  const result = {
+    "data": {
+      "video": {
+        "url": "https://v3b.fal.media/files/b/penguin/Ju4oTpN3bx4NiIaAFFsyM_tmpda3sacqs.mp4",
+        "content_type": "video/mp4",
+        "file_name": null,
+        "file_size": null
       }
     },
-  });
+    "requestId": "e515605b-b9ec-49f7-9be3-b104bbb7fba9"
+  }
 
   console.log("[Step 3] Result:", JSON.stringify(result, null, 2));
   const videoUrl = result.data.video.url as string;
@@ -114,10 +134,11 @@ async function runGenerateVideo(audioUrl: string): Promise<string> {
 async function composeVideos(generatedVideoUrl: string): Promise<string> {
   console.log("[Step 4] Composing video:", generatedVideoUrl);
 
-  const TEMPLATE_ID = "9aba85de-a247-41a2-b976-531627d6f3a7";
+  const TEMPLATE_ID = "a9910222-43c2-4d3e-b9aa-dc21c16608c4";
   const apiKey = process.env.CREATOMATE_API_KEY;
 
-  const response = await fetch("https://api.creatomate.com/v2/renders", {
+  // Create render
+  const createResponse = await fetch("https://api.creatomate.com/v2/renders", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -131,17 +152,55 @@ async function composeVideos(generatedVideoUrl: string): Promise<string> {
     }),
   });
 
-  if (!response.ok) {
-    throw new Error(`Creatomate API error: ${response.status}`);
+  if (!createResponse.ok) {
+    throw new Error(`Creatomate API error: ${createResponse.status}`);
   }
 
-  const data = await response.json();
-  console.log("[Step 4] Result:", JSON.stringify(data, null, 2));
+  const createData = await createResponse.json();
+  console.log("[Step 4] Render created:", JSON.stringify(createData, null, 2));
 
-  // Extract video URL from response (structure TBD based on actual response)
-  const composedVideoUrl = data.url || data.video_url || data[0]?.url;
+  const renderId = createData[0]?.id;
+  if (!renderId) {
+    throw new Error("No render ID returned from Creatomate");
+  }
 
-  return composedVideoUrl;
+  // Poll for completion (max 5 minutes)
+  const maxWaitTime = 5 * 60 * 1000; // 5 minutes
+  const pollInterval = 5000; // 5 seconds
+  const startTime = Date.now();
+
+  while (Date.now() - startTime < maxWaitTime) {
+    const statusResponse = await fetch(
+      `https://api.creatomate.com/v2/renders/${renderId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    if (!statusResponse.ok) {
+      throw new Error(`Creatomate status check failed: ${statusResponse.status}`);
+    }
+
+    const statusData = await statusResponse.json();
+    console.log("[Step 4] Render status:", statusData.status);
+
+    if (statusData.status === "succeeded") {
+      const videoUrl = statusData.url;
+      console.log("[Step 4] Render completed:", videoUrl);
+      return videoUrl;
+    }
+
+    if (statusData.status === "failed") {
+      throw new Error(`Creatomate render failed: ${statusData.error_message || "Unknown error"}`);
+    }
+
+    // Wait 5 seconds before next poll
+    await new Promise((resolve) => setTimeout(resolve, pollInterval));
+  }
+
+  throw new Error("Creatomate render timeout after 5 minutes");
 }
 
 export async function POST(request: Request) {
@@ -177,18 +236,17 @@ export async function POST(request: Request) {
   try {
     console.log(`[Video Generation] Starting workflow for runId: ${runId}`);
 
-    // Run 3-step pipeline synchronously
+    // Run 4-step pipeline synchronously
     const processedText = await runProcessTranscript(text);
     const narrationAudio = await runGenerateNarration(processedText);
-    const videoUrl = await runGenerateVideo(narrationAudio.audioUrl);
-    // TODO: Add video composition step
-    // const composedVideoUrl = await composeVideos(videoUrl);
+    const generatedVideoUrl = await runGenerateVideo(narrationAudio.audioUrl);
+    const composedVideoUrl = await composeVideos(generatedVideoUrl);
 
     console.log(`[Video Generation] Completed for runId: ${runId}`);
 
     const response: VideoGenerationResponse = {
       runId,
-      videoUrl,
+      videoUrl: composedVideoUrl,
       status: "completed",
     };
 
