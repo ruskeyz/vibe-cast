@@ -120,3 +120,117 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  /* added fancy striped gradient button styles */
+  .gradient-stripe-button {
+    @apply relative inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-white rounded-xl overflow-hidden transition-all duration-300 ease-out;
+    background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #6366f1 100%);
+    background-size: 200% 200%;
+    box-shadow:
+      0 20px 40px rgba(139, 92, 246, 0.4),
+      0 0 60px rgba(59, 130, 246, 0.2);
+  }
+
+  .gradient-stripe-button::before {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    content: "";
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .gradient-stripe-button:hover {
+    background-position: 200% center;
+    box-shadow:
+      0 25px 50px rgba(139, 92, 246, 0.6),
+      0 0 80px rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .gradient-stripe-button:hover::before {
+    @apply opacity-100;
+  }
+
+  .gradient-stripe-button:active {
+    transform: translateY(0);
+    box-shadow:
+      0 15px 30px rgba(139, 92, 246, 0.4),
+      0 0 40px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Added secondary button with animated gradient border */
+  .gradient-stripe-button-outline {
+    @apply relative inline-flex items-center justify-center gap-2 px-8 py-4 font-semibold text-white rounded-xl overflow-hidden transition-all duration-300 ease-out bg-transparent;
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #6366f1 100%)
+      1;
+    background-clip: padding-box;
+    /* Removed 'position: relative;' as it's already included by @apply relative */
+  }
+
+  .gradient-stripe-button-outline::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 0.75rem;
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgba(139, 92, 246, 0.1) 0%,
+      rgba(59, 130, 246, 0.1) 50%,
+      rgba(99, 102, 241, 0.1) 100%
+    );
+    /* Removed @apply with conflicting classes, using pure CSS instead */
+  }
+
+  .gradient-stripe-button-outline::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #6366f1 100%);
+    background-size: 200% 200%;
+    border-radius: 0.75rem;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease-out;
+  }
+
+  .gradient-stripe-button-outline:hover {
+    box-shadow:
+      0 0 30px rgba(139, 92, 246, 0.4),
+      inset 0 0 30px rgba(139, 92, 246, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .gradient-stripe-button-outline:hover::after {
+    opacity: 0.1;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  .gradient-stripe-button-outline:active {
+    transform: translateY(0);
+  }
+
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+  }
+}

@@ -22,7 +22,7 @@ const valueProps = [
   {
     title: "Stay in sync without the meeting drag.",
     description:
-      "Convert raw transcripts into 60-second summaries that highlight decisions, blockers, and wins.",
+      "Convert raw transcripts into summaries that highlight decisions, blockers, and wins.",
   },
   {
     title: "Tone presets that match your culture.",
@@ -95,18 +95,32 @@ export default function HomePage() {
                 updates that employees actually watch.
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <Button size="lg" className="h-11 px-6 text-base">
-                  Generate a recap
-                  <ArrowRight className="size-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="h-11 border-white/30 bg-white/10 px-6 text-base text-white hover:bg-white/20"
+                <Link
+                  href="/video-generation"
+                  className="gradient-stripe-button"
                 >
-                  <Play className="size-4" />
+                  Generate a recap
+                  <svg
+                    className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </Link>
+                <Link
+                  href="/video-demo"
+                  className="border border-white rounded-xl flex items-center py-4 px-4"
+                >
+                  <Play className="size-4 mr-1" />
                   See it in action
-                </Button>
+                </Link>
               </div>
             </div>
             <div className="relative">
