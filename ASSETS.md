@@ -36,6 +36,7 @@ dsjsdf
 ### Value Proposition Grid
 
 1. **Stay in sync without the meeting drag.**
+   fff
    - Convert raw transcripts into 60-second summaries that highlight decisions, blockers, and wins.
 2. **Tone presets that match your culture.**
    - Choose from executive polish, product hype, or meme chaos—each keeps language on-brand.
