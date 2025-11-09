@@ -125,59 +125,59 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-white/60 via-white/10 to-transparent blur-xl" />
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-gradient-to-br from-white/15 via-white/5 to-white/10 p-8 shadow-2xl">
-                <div className="space-y-4">
-                  <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-white/80">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">
-                        Executive polish template
-                      </span>
-                      <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs">
-                        Active
-                      </span>
-                    </div>
-                    <p className="mt-3 text-white/70">
-                      “Leadership decisions in under 60 seconds. Today we
-                      doubled revenue streams and launched the on-demand
-                      concierge.”
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-white/80">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium">Slack auto-post</span>
-                      <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs">
-                        Queued
-                      </span>
-                    </div>
-                    <p className="mt-3 text-white/70">
-                      Recap drops in #all-hands with thumbnails, captions, and
-                      CTA overlay baked in.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-white/70">
-                    <div className="flex items-center justify-between">
-                      <span className="font-medium text-white/80">
-                        Engagement snapshot
-                      </span>
-                      <ArrowRight className="size-4 text-white/60" />
-                    </div>
-                    <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
-                      <div className="rounded-xl border border-white/15 bg-white/5 p-3">
-                        <p className="text-white/60">Watch-through</p>
-                        <p className="mt-2 text-lg font-semibold text-white">
-                          86%
-                        </p>
-                      </div>
-                      <div className="rounded-xl border border-white/15 bg-white/5 p-3">
-                        <p className="text-white/60">CTA clicks</p>
-                        <p className="mt-2 text-lg font-semibold text-white">
-                          3.1×
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-gradient-to-br from-white/15 via-white/5 to-white/10 p-8 shadow-2xl"> */}
+              {/* <div className="space-y-4"> */}
+              {/*     <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-white/80"> */}
+              {/*       <div className="flex items-center justify-between"> */}
+              {/*         <span className="font-medium"> */}
+              {/*           Executive polish template */}
+              {/*         </span> */}
+              {/*         <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs"> */}
+              {/*           Active */}
+              {/*         </span> */}
+              {/*       </div> */}
+              {/*       <p className="mt-3 text-white/70"> */}
+              {/*         “Leadership decisions in under 60 seconds. Today we */}
+              {/*         doubled revenue streams and launched the on-demand */}
+              {/*         concierge.” */}
+              {/*       </p> */}
+              {/*     </div> */}
+              {/*     <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-white/80"> */}
+              {/*       <div className="flex items-center justify-between"> */}
+              {/*         <span className="font-medium">Slack auto-post</span> */}
+              {/*         <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs"> */}
+              {/*           Queued */}
+              {/*         </span> */}
+              {/*       </div> */}
+              {/*       <p className="mt-3 text-white/70"> */}
+              {/*         Recap drops in #all-hands with thumbnails, captions, and */}
+              {/*         CTA overlay baked in. */}
+              {/*       </p> */}
+              {/*     </div> */}
+              {/*     <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-white/70"> */}
+              {/*       <div className="flex items-center justify-between"> */}
+              {/*         <span className="font-medium text-white/80"> */}
+              {/*           Engagement snapshot */}
+              {/*         </span> */}
+              {/*         <ArrowRight className="size-4 text-white/60" /> */}
+              {/*       </div> */}
+              {/*       <div className="mt-4 grid grid-cols-2 gap-3 text-xs"> */}
+              {/*         <div className="rounded-xl border border-white/15 bg-white/5 p-3"> */}
+              {/*           <p className="text-white/60">Watch-through</p> */}
+              {/*           <p className="mt-2 text-lg font-semibold text-white"> */}
+              {/*             86% */}
+              {/*           </p> */}
+              {/*         </div> */}
+              {/*         <div className="rounded-xl border border-white/15 bg-white/5 p-3"> */}
+              {/*           <p className="text-white/60">CTA clicks</p> */}
+              {/*           <p className="mt-2 text-lg font-semibold text-white"> */}
+              {/*             3.1× */}
+              {/*           </p> */}
+              {/*         </div> */}
+              {/*       </div> */}
+              {/*     </div> */}
+              {/*   </div> */}
+              {/* </div> */}
             </div>
           </div>
         </section>
