@@ -29,7 +29,7 @@ async function runProcessTranscript(text: string): Promise<ProcessTextOutput> {
   console.log("[Step 1] Processing transcript:", text.substring(0, 50));
 
   const prompt = `This is a longform text from my corporate online meeting. Analyze it, find key points, come up with the questions that may come up based on this text.
-Then generate a brief recap that will be narrated outloud, make it 1-1.5 min for reading.
+Then generate a brief recap that will be narrated outloud, make it 30 seconds for reading.
 Return only a string of text that would be read outloud and nothing else.
 Optimize the text to be entartaining and interesting.
 ${text}.`;
@@ -65,6 +65,18 @@ async function runGenerateNarration(
     },
     logs: true,
   });
+  // const result = {
+  //   "data": {
+  //     "audio": {
+  //       "url": "https://v3b.fal.media/files/b/rabbit/PTmgoZ436rQtYivmNmGr7_output.mp3",
+  //       "content_type": "audio/mpeg",
+  //       "file_name": "output.mp3",
+  //       "file_size": 2015444
+  //     },
+  //     "timestamps": null
+  //   },
+  //   "requestId": "68d6747d-b69f-4d08-8ba2-45bf978762f5"
+  // }
 
   console.log("[Step 2] Result:", JSON.stringify(result, null, 2));
   const audioUrl = result.data.audio.url as string;
@@ -76,9 +88,11 @@ async function runGenerateNarration(
 async function runGenerateVideo(audioUrl: string): Promise<string> {
   console.log("[Step 3] Generating video with audio:", audioUrl);
 
+  const imageUrl = "https://see-real-granola-hacl.s3.eu-west-2.amazonaws.com/photo_2025-11-09+14.25.47.jpeg"
+
   const result = await fal.subscribe("veed/fabric-1.0/fast", {
     input: {
-      image_url: "blob:https://fal.ai/4a6fe902-7156-4c01-87e7-6e92a8b8cb62",
+      image_url: imageUrl,
       audio_url: audioUrl,
       resolution: "480p"
     },
