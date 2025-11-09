@@ -1,22 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
-import {
-  ArrowRight,
-  BarChart3,
-  Play,
-  ShieldCheck,
-  Sparkles,
-  Workflow,
-} from "lucide-react";
+import { ArrowRight, Play, Workflow } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -26,13 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-const navigation = [
-  { label: "Product", href: "#product" },
-  { label: "Templates", href: "#templates" },
-  { label: "Insights", href: "#insights" },
-  { label: "Pricing", href: "#pricing" },
-];
+import Link from "next/link";
 
 const socialProof = [
   "Slack ready",
@@ -230,9 +208,9 @@ export default function HomePage() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <div className="flex items-center gap-2 text-foreground">
             <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-foreground/90 text-background">
-              VC
+              SeeReal
             </span>
-            <span className="font-medium">VibeCast</span>
+            <span className="font-medium">SeeReal</span>
           </div>
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} SeeReal. All rights reserved.
