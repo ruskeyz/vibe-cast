@@ -129,7 +129,7 @@ async function runGenerateVideo(audioUrl: string): Promise<string> {
 
   return videoUrl;
 }
--
+
 // Step 4: Compose videos using Creatomate
 async function composeVideos(generatedVideoUrl: string): Promise<string> {
   console.log("[Step 4] Composing video:", generatedVideoUrl);
