@@ -53,6 +53,7 @@ ${text}.`;
 
   // Extract narration text from result
   console.log("[Step 1] Result:", JSON.stringify(result, null, 2));
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const narration = result.data.output as string;
 
   return { narration };
@@ -88,6 +89,7 @@ async function runGenerateNarration(
   }
 
   console.log("[Step 2] Result:", JSON.stringify(result, null, 2));
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const audioUrl = result.data.audio.url as string;
 
   return { audioUrl };
@@ -125,6 +127,7 @@ async function runGenerateVideo(audioUrl: string): Promise<string> {
   }
 
   console.log("[Step 3] Result:", JSON.stringify(result, null, 2));
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const videoUrl = result.data.video.url as string;
 
   return videoUrl;
@@ -137,70 +140,72 @@ async function composeVideos(generatedVideoUrl: string): Promise<string> {
   const TEMPLATE_ID = "a9910222-43c2-4d3e-b9aa-dc21c16608c4";
   const apiKey = process.env.CREATOMATE_API_KEY;
 
-  // Create render
-  const createResponse = await fetch("https://api.creatomate.com/v2/renders", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      template_id: TEMPLATE_ID,
-      modifications: {
-        "video_talking_head": generatedVideoUrl,
-      },
-    }),
-  });
+  // // Create render
+  // const createResponse = await fetch("https://api.creatomate.com/v2/renders", {
+  //   method: "POST",
+  //   headers: {
+  //     Authorization: `Bearer ${apiKey}`,
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     template_id: TEMPLATE_ID,
+  //     modifications: {
+  //       "video_talking_head": generatedVideoUrl,
+  //     },
+  //   }),
+  // });
 
-  if (!createResponse.ok) {
-    throw new Error(`Creatomate API error: ${createResponse.status}`);
-  }
+  // if (!createResponse.ok) {
+  //   throw new Error(`Creatomate API error: ${createResponse.status}`);
+  // }
 
-  const createData = await createResponse.json();
-  console.log("[Step 4] Render created:", JSON.stringify(createData, null, 2));
+  // const createData = await createResponse.json();
+  // console.log("[Step 4] Render created:", JSON.stringify(createData, null, 2));
 
-  const renderId = createData.id;
-  if (!renderId) {
-    throw new Error("No render ID returned from Creatomate");
-  }
+  // const renderId = createData.id;
+  // if (!renderId) {
+  //   throw new Error("No render ID returned from Creatomate");
+  // }
 
-  // Poll for completion (max 5 minutes)
-  const maxWaitTime = 5 * 60 * 1000; // 5 minutes
-  const pollInterval = 5000; // 5 seconds
-  const startTime = Date.now();
+  // // Poll for completion (max 5 minutes)
+  // const maxWaitTime = 5 * 60 * 1000; // 5 minutes
+  // const pollInterval = 5000; // 5 seconds
+  // const startTime = Date.now();
 
-  while (Date.now() - startTime < maxWaitTime) {
-    const statusResponse = await fetch(
-      `https://api.creatomate.com/v2/renders/${renderId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-        },
-      }
-    );
+  // while (Date.now() - startTime < maxWaitTime) {
+  //   const statusResponse = await fetch(
+  //     `https://api.creatomate.com/v2/renders/${renderId}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${apiKey}`,
+  //       },
+  //     }
+  //   );
 
-    if (!statusResponse.ok) {
-      throw new Error(`Creatomate status check failed: ${statusResponse.status}`);
-    }
+  //   if (!statusResponse.ok) {
+  //     throw new Error(`Creatomate status check failed: ${statusResponse.status}`);
+  //   }
 
-    const statusData = await statusResponse.json();
-    console.log("[Step 4] Render status:", statusData.status);
+  //   const statusData = await statusResponse.json();
+  //   console.log("[Step 4] Render status:", statusData.status);
 
-    if (statusData.status === "succeeded") {
-      const videoUrl = statusData.url;
-      console.log("[Step 4] Render completed:", videoUrl);
-      return videoUrl;
-    }
+  //   if (statusData.status === "succeeded") {
+  //     const videoUrl = statusData.url;
+  //     console.log("[Step 4] Render completed:", videoUrl);
+  //     return videoUrl;
+  //   }
 
-    if (statusData.status === "failed") {
-      throw new Error(`Creatomate render failed: ${statusData.error_message || "Unknown error"}`);
-    }
+  //   if (statusData.status === "failed") {
+  //     throw new Error(`Creatomate render failed: ${statusData.error_message || "Unknown error"}`);
+  //   }
 
-    // Wait 5 seconds before next poll
-    await new Promise((resolve) => setTimeout(resolve, pollInterval));
-  }
+  //   // Wait 5 seconds before next poll
+  //   await new Promise((resolve) => setTimeout(resolve, pollInterval));
+  // }
 
-  throw new Error("Creatomate render timeout after 5 minutes");
+  // throw new Error("Creatomate render timeout after 5 minutes");
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  return "https://f002.backblazeb2.com/file/creatomate-c8xg3hsxdu/31533847-6848-45df-9393-c73193bad0fc.mp4"
 }
 
 export async function POST(request: Request) {
