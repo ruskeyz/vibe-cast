@@ -6,6 +6,7 @@ Stripe-inspired marketing site for VibeCast, the AI assistant that transforms me
 - Hero section with gradient backdrop, product reels, and dual CTAs.
 - Value prop grid, metrics, feature spotlights, and testimonial pulled from [`ASSETS.md`](./ASSETS.md).
 - Responsive layout that matches Stripe’s rhythm, typography scale, and glassmorphism accents.
+- Video generation workspace with Stripe-inspired glass panels, transcript input, and tone presets (executive, product hype, meme chaos).
 
 ### Tech Stack
 - Next.js 14 / App Router
@@ -23,6 +24,7 @@ Stripe-inspired marketing site for VibeCast, the AI assistant that transforms me
    pnpm dev
    ```
 3. Visit http://localhost:3000 to explore the landing page.
+4. Navigate to http://localhost:3000/video-generation to try the recap workspace, paste a transcript, pick a tone preset, and queue a render.
 
 ### Project Structure
 - `src/app/page.tsx` – Stripe-style landing page composition.
