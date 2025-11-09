@@ -125,6 +125,20 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-white/60 via-white/10 to-transparent blur-xl" />
+              <video
+                className="h-full w-full rounded-[1.5rem] object-cover"
+                controls
+                playsInline
+                preload="metadata"
+                poster="/video-poster.jpg"
+              >
+                <source
+                  src="https://see-real-granola-hacl.s3.eu-west-2.amazonaws.com/31533847-6848-45df-9393-c73193bad0fc.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+
               {/* <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-gradient-to-br from-white/15 via-white/5 to-white/10 p-8 shadow-2xl"> */}
               {/* <div className="space-y-4"> */}
               {/*     <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-white/80"> */}
