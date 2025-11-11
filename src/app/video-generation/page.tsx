@@ -74,7 +74,7 @@ const pipeline = [
 
 export default function VideoGenerationPage() {
   const [text, setText] = useState("");
-  const [tone, setTone] = useState<TonePreset["value"]>("executive");
+  const [tone, setTone] = useState<TonePreset["value"]>("meme");
   const router = useRouter();
 
   const selectedTone = useMemo(

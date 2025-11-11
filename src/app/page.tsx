@@ -124,7 +124,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative">
-              <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-white/60 via-white/10 to-transparent blur-xl" />
+              <div className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-white/60 via-white/10 to-transparent blur-xl" />
               <video
                 className="h-full w-full rounded-[1.5rem] object-cover"
                 controls
